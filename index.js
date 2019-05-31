@@ -28,7 +28,7 @@ var sizeOf = require('image-size');
 
 
 let imgRaw = './public/src/chitwan.jpg';
-let imgLogo = './public/img/logo.png';
+let imgLogo = './public/src/administrator-male.png';
 let imgExported = './public/src/image1.jpg';
 
 
@@ -39,14 +39,20 @@ app.get('/watermark', function (req, res) {
       .then(tpl =>
         Jimp.read(imgLogo).then(logoTpl => {
           logoTpl.opacity(0.4);
-          console.log(dimensions.width, dimensions.height);
+          // console.log(dimensions.width, dimensions.height);
           const height=dimensions.height;
           const width=dimensions.width;
-          console.log(height/2,width/2);
-          console.log(tpl.getHeight(),tpl.getWidth());
+          // console.log(height/2,width/2);
+          // console.log(tpl.getHeight(),tpl.getWidth());
+          const l=tpl.getHeight();
+          const b=tpl.getWidth();
+          logoTpl.resize(2*(width/3),2*(height/3));
+          console.log(logoTpl.getWidth(),logoTpl.getHeight())
+          // const x=logoTpl.getHeight();
+          // const y=logoTpl.getWidth();
           return tpl.composite(logoTpl,
-            width/2,
-            height/2,
+            width/6,
+            height/6,
             // (dimensions.height) / 2, //Height from Top
             // (dimensions.width) / 2, //Width from left corner
             Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE);
